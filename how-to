@@ -1,0 +1,26 @@
+well what does each script do ?
+
+-> nvidia_off.sh
+	-> Unloads some modules
+	-> Disables gpu via acpi_call
+	-> Removes Nvidia bus from kernel + enables powersave for the graphic card and PCIe controller
+-> nvidia_on.sh
+	-> Enables gpu using acpi_call
+	-> Turns on the gpu 
+	-> Loads some modules
+
+If you are reading this section, and have tried this in your machine, chances are high that it won't work.
+In both the files, there's a function to enable, and disable the gpu.
+For this to work, you will need a string , for acpi_call to work.
+This string can be foung out , if you have acpi_call installed.
+In the folder /usr/share/acpi_call there's a file calles turn_off_gpu.sh.
+For further info on how to obtain this string( its of the type, \_SB....)
+goto https://wiki.archlinux.org/title/hybrid_graphics#Using_acpi_call
+Now replace my string, with your string and it should work all fine.
+After a gpu on/off make sure your restart your favourite window manager.
+This script is taken(copied) mostly from nvidia-xrun, and the acpi_call part i have added, but not done any checking if it's really needed or not.
+If you are feeling that somthing can be improved, please create an issue.
+The reason i am not releasing it for any distro(in my case void), is that i don't know how to.
+Dependencies
+	->acpi_call
+	->nvidia
